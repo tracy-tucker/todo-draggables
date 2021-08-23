@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import _ from 'lodash';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import './App.css';
+import {v4} from 'uuid';
 
 function App() {
   const _ = require('lodash');
@@ -27,10 +28,14 @@ function App() {
           return (
             <div className={"column"}>
               <h3>{data.title}.</h3>
-              <Droppable>
+              <Droppable droppableId={key}>
               {(provided) => {
                 return (
-                  <div>
+                  <div
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  className={"droppable-col"}
+                  >
                     START HERE
                   </div>
                 )
