@@ -31,9 +31,20 @@ function App() {
       items: []
     }
   })
+
+  const handleDragEnd = ({destination, source}) => {
+    if (!destination) {
+      return
+    }
+
+    if (destination.index === source.index && destination.droppableId == source.droppableId) {
+      return
+    }
+  }
+
   return (
     <div className="App">
-      <DragDropContext onDragEnd={e => console.log(e)}>
+      <DragDropContext onDragEnd={handleDragEnd}>
         {_.map(state, (data, key) => {
           return (
             <div key={key} className={"column"}>
