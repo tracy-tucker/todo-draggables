@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import './App.css';
 
 function App() {
@@ -18,7 +19,11 @@ function App() {
   })
   return (
     <div className="App">
-      test
+      <DragDropContext onDragEnd={e => console.log(e)}>
+        <Droppable>
+          //
+        </Droppable>
+      </DragDropContext>
     </div>
   );
 }
