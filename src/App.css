@@ -12,4 +12,9 @@
   width: 100%;
   height: 50px;
   background-color: gray;
+  padding: 10px;
+}
+
+.item {
+  margin-bottom: 10px;
 }
