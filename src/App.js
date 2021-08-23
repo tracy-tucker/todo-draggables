@@ -4,13 +4,23 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import './App.css';
 import {v4} from 'uuid';
 
+const item = {
+  id: v4(),
+  name: "Clean the house"
+}
+
+const item2 = {
+  id: v4(),
+  name: "Wash the Car"
+}
+
 function App() {
   const _ = require('lodash');
   
   const [state, setState] = useState({
     "todo": {
       title: "Todo",
-      items: []
+      items: [item, item2]
     },
     "in-progress": {
       title: "In Progress",
@@ -22,7 +32,7 @@ function App() {
     }
   })
   return (
-    <div className="App">
+    <div key={key} className="App">
       <DragDropContext onDragEnd={e => console.log(e)}>
         {_.map(state, (data, key) => {
           return (
