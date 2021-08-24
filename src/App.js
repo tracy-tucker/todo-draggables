@@ -17,6 +17,7 @@ const item2 = {
 function App() {
   const _ = require('lodash');
   
+  const [text, setText] = useState('')
   const [state, setState] = useState({
     "todo": {
       title: "Todo",
@@ -40,10 +41,47 @@ function App() {
     if (destination.index === source.index && destination.droppableId == source.droppableId) {
       return
     }
+    
+    // Creating a copy of item before removing it from state
+    const itemCopy = {...state[source.droppableId].items[source.index]}
+    
+    setState(prev => {
+      prev = {...prev}
+
+      // Remove from previous items array
+      prev[source.droppableId].items.splice(source.index, 1)
+      
+      // Adding to new items array location
+      prev[destination.droppableId].items.splice(destination.index, 0, itemCopy)
+      
+      return prev
+    })
+  }
+
+  const addItem = () => {
+    setState(prev => {
+      return {
+        ...prev,
+        todo: {
+          title: "title",
+          items: [
+            {
+              id: v4(),
+              name: text
+            },
+            ...prev.todo.items]
+        }
+      }
+    })
+    setText("")
   }
 
   return (
     <div className="App">
+      <div>
+        <input type="text" value={text} onChange={(e) => setText(e.target.value)} />
+        <button onClick={addItem}>Add</button>
+      </div>
       <DragDropContext onDragEnd={handleDragEnd}>
         {_.map(state, (data, key) => {
           return (
